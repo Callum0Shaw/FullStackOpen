@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 
-const DisplayName = (props) => (
-  <p>
-    {props.person.name} {props.person.number}
-  </p>
-);
+const DisplayName = (props) => {
+  const regex = new RegExp(`${props.filter}`, "i");
+  if (props.person.name.match(regex)) {
+    return (
+      <p>
+        {props.person.name} {props.person.number}
+      </p>
+    );
+  } else {
+    return "";
+  }
+};
 
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "0123" },
+    { name: "bill Hellas", number: "0123" },
+    { name: "steve Hellas", number: "0123" },
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [newFilter, setNewFilter] = useState("");
 
   const handleNameChange = (event) => setNewName(event.target.value);
 
   const handleNumberChange = (event) => setNewNumber(event.target.value);
+
+  const handleFilterChange = (event) => setNewFilter(event.target.value);
 
   const addName = (event) => {
     event.preventDefault();
@@ -29,6 +41,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        Filter:
+        <input value={newFilter} onChange={handleFilterChange} />
+      </div>
+      <h2>Add New</h2>
       <form onSubmit={addName}>
         <div>
           <div>
@@ -44,7 +61,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map((person) => (
-        <DisplayName key={person.name} person={person} />
+        <DisplayName key={person.name} person={person} filter={newFilter} />
       ))}
     </div>
   );
