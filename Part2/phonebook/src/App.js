@@ -3,6 +3,7 @@ import DisplayName from "./components/DisplayName";
 import AddNameForm from "./components/AddNameForm";
 import FilterNames from "./components/FilterNames";
 import axios from "axios";
+import service from "./services/persons";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,9 +12,7 @@ const App = () => {
   const [newFilter, setNewFilter] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
-    });
+    service.getAll().then((initialPersons) => setPersons(initialPersons));
   }, []);
 
   return (
