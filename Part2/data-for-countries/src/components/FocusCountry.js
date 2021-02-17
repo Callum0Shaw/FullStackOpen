@@ -1,4 +1,5 @@
 import React from "react";
+import Weather from "./Weather";
 
 const FocusCountry = (props) => {
   const country = props.country;
@@ -14,6 +15,7 @@ const FocusCountry = (props) => {
         ))}
       </ol>
       <img src={country.flag} alt={`flag for ${country.name}`}></img>
+      <Weather country={props.country} />
     </div>
   );
 };

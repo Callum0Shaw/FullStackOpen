@@ -16,7 +16,11 @@ const RenderCountries = (props) => {
     return <FocusCountry country={filtered[0]} />;
   } else if (length < 11 && length > 0) {
     return filtered.map((country) => (
-      <DisplayCountry country={country} key={country.name} />
+      <DisplayCountry
+        country={country}
+        key={country.name}
+        setFilter={props.setFilter}
+      />
     ));
   } else if (length > 10) {
     return <p>Too many countries to handle, please filer</p>;

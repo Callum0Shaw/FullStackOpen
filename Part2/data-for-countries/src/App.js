@@ -18,7 +18,11 @@ const App = () => {
     <div>
       <h2>Find Countries</h2>
       <Search value={filter} setFilter={setFilter} />
-      <RenderCountries filter={filter} countries={countries} />
+      <RenderCountries
+        filter={filter}
+        countries={countries}
+        setFilter={setFilter}
+      />
     </div>
   );
 };
