@@ -22,6 +22,8 @@ const AddNameForm = (props) => {
       const newPerson = { name: props.name, number: props.number };
       services.create(newPerson).then((response) => {
         props.setPersons(persons.concat(newPerson));
+        props.setNewName("");
+        props.setNewNumber("");
       });
     }
   };

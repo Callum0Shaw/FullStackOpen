@@ -33,7 +33,13 @@ const App = () => {
       />
       <h2>Numbers</h2>
       {persons.map((person) => (
-        <DisplayName key={person.name} person={person} filter={newFilter} />
+        <DisplayName
+          key={person.name}
+          person={person}
+          filter={newFilter}
+          persons={persons}
+          setPersons={setPersons}
+        />
       ))}
     </div>
   );
