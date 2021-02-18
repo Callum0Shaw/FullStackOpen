@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DisplayName from "./components/DisplayName";
 import AddNameForm from "./components/AddNameForm";
 import FilterNames from "./components/FilterNames";
+import Notification from "./components/Notification";
 import axios from "axios";
 import service from "./services/persons";
 
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     service.getAll().then((initialPersons) => setPersons(initialPersons));
@@ -18,6 +20,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <div>
         Filter:
         <FilterNames newFilter={newFilter} setNewFilter={setNewFilter} />
@@ -27,6 +30,7 @@ const App = () => {
         name={newName}
         number={newNumber}
         persons={persons}
+        setMessage={setMessage}
         setNewName={setNewName}
         setNewNumber={setNewNumber}
         setPersons={setPersons}

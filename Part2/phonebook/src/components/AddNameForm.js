@@ -4,7 +4,6 @@ import services from "/home/callum/Documents/FullStackOpen/Part2/phonebook/src/s
 const AddNameForm = (props) => {
   const persons = props.persons;
   const personExists = persons.find((person) => person.name === props.name);
-  console.log(personExists);
   const newPerson = { name: props.name, number: props.number };
 
   const handleNumberChange = (event) => props.setNewNumber(event.target.value);
@@ -19,12 +18,16 @@ const AddNameForm = (props) => {
             person.name === props.name ? newPerson : person
           )
         )
-      );
+      )
+      .catch((error) => {
+        props.setMessage(`${newPerson.name} has already been deleted!`);
+      });
   };
 
   const createPerson = () => {
     services.create(newPerson).then((response) => {
       props.setPersons(persons.concat(newPerson));
+      props.setMessage(`Added ${newPerson.name}`);
       props.setNewName("");
       props.setNewNumber("");
     });
